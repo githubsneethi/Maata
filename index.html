@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maata</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheet.css') }}">
+    
+</head>
+<body>
+<div class = "page">
+    <div class="container">   
+        <h1> Maata : Eng - Tel Keyboard</h1>
+        <div>
+            <button id="controlBtn" onclick="changeSize(2)"> A+ </button>
+            <button id="controlBtn" onclick="changeSize(-2)"> A- </button>
+        </div>
+
+        <div class = "subcontainer">
+            <div class="section">
+                <label for="english">English:</label>
+                <textarea id="english" class="output" placeholder="English text"></textarea>
+                
+                <div class="suggestions-container" id="suggestionsContainer"></div>
+            </div>
+
+            <div class="section">
+                <label for="telugu">Telugu:</label>
+                <textarea id="telugu" class="output" placeholder="Telugu text"></textarea>
+                <button id = "copyBtn">Copy Telugu Text</button>
+            </div>
+        </div>
+        <button id = "clearBtn" onclick="clearText()">Clear</button>
+
+        <div class="info">
+            <strong>How it works:</strong> Type some words. Suggestions will appear below the text field.
+        </div>
+
+        <!--<div class="info" style="background: #fff0f0; border-left-color: #764ba2; margin-top: 10px;">
+            <strong>Telugu Phonetic Rules:</strong>
+            <ul style="margin-top: 8px; margin-left: 20px;">
+                <li><strong>న (Simple N):</strong> Type 'n' before vowels → namaste = నమస్తే</li>
+                <li><strong>ణ (Retroflex N):</strong> Auto-detected! Type 'n' before 't/d → pranuthi = ప్రణుతి</li>
+                <li><strong>ం (Anusvara):</strong> Type 'M' (capital) → saMsaram = సంసారం</li>
+                <li><strong>ఞ (Palatal Nasal):</strong> Type 'ny' → chinchu = చించు</li>
+                <li><strong>ఙ (Velar Nasal):</strong> Type 'ng' → langa = లంగా</li>
+            </ul>
+        </div>-->
+
+        <div class="debug" id="debug">Connected to server</div>
+    </div>
+    <div class="about-box">
+        <h2>About Maata</h2>
+
+        <p>
+            Maata is an English-to-Telugu transliteration keyboard designed to
+            make typing Telugu easier using the English keyboard. It combines
+            phonetic preprocessing, custom language rules, and autocomplete to
+            generate natural Telugu script.
+        </p>
+    </div>
+</div>
+    
+<script src = "{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

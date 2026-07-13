@@ -1,0 +1,236 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    font-size: 16px; 
+    background-color: #e5e7eb;
+    background-image: 
+        radial-gradient(#000000 20%, transparent 20%),
+        radial-gradient(#000000 20%, transparent 20%);
+    background-size: 20px 20px;
+    background-position: 0 0, 20px 20px;
+    color: #333;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;          
+    width: 100%;
+    max-width: 900px; 
+}
+
+.container {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05); 
+    width: 100%;
+}
+
+
+h1 {
+    color: #2d3748;
+    margin-bottom: 25px;
+    text-align: center;
+    font-size: 26px;
+    font-weight: 700;
+}
+
+/* FLEXBOX */
+.subcontainer {
+    display: flex;
+    flex-direction: row; 
+    gap: 20px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+/*FALLBACK FOR PHONE SCREENS*/
+@media (max-width: 650px) {
+    .subcontainer {
+        flex-direction: column;
+    }
+}
+
+.section {
+    flex: 1; 
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+label {
+    display: block;
+    color: #4a5568;
+    font-weight: 600;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+textarea {
+    width: 100%; 
+    height: 180px; 
+    padding: 14px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 16px;
+    font-family: inherit; 
+    resize: none;
+    background: #ffffff;
+    color: #2d3748;
+    transition: all 0.2s ease;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15); 
+}
+
+textarea.output#telugu {
+    background: #f8fafc;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+}
+
+button:hover {
+    background: #5a67d8;
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+#controlBtn{
+    background-color: #ffffff; 
+    color: #333333;            
+    border: 1px solid #ccc;    
+    padding: 6px 12px;         /* Decreased padding to shrink the size */
+    margin: 5px;               /* Margin around buttons */
+    width: 60px;               
+    cursor: pointer;
+    border-radius: 4px;      
+    font-weight: bold;
+}
+
+#control-btn:hover {
+    background-color: #f0f0f0;
+}
+
+#clearBtn {
+    background: #edf2f7;
+    color: #4a5568;
+    margin-top: 10px;
+}
+
+#clearBtn:hover {
+    background: #e2e8f0;
+}
+
+.section button {
+    margin-top: 10px;
+}
+
+.suggestions-container {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 2px solid #667eea;
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    max-height: 150px;
+    overflow-y: auto;
+    z-index: 10;
+    display: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.suggestions-container.show {
+    display: block;
+}
+
+.suggestion-item {
+    padding: 10px 14px;
+    border-bottom: 1px solid #edf2f7;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.suggestion-item:hover {
+    background: #f7fafc;
+}
+
+.info {
+    background: #f7fafc;
+    padding: 14px;
+    border-radius: 6px;
+    color: #4a5568;
+    font-size: 13px;
+    margin-top: 20px;
+    border-left: 4px solid #667eea;
+    line-height: 1.5;
+}
+
+.debug {
+    background: #fef3c7; /* Light amber warning state default */
+    color: #92400e;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    margin-top: 15px;
+    font-family: monospace;
+    text-align: center;
+    font-weight: 500;
+}
+
+.debug.connected {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.about-box {
+    background: white;
+    width: 100%;
+    padding: 25px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+    border: 1px solid #e2e8f0;
+}
+
+.about-box h2 {
+    margin-bottom: 10px;
+    color: #2d3748;
+    font-size: 18px;
+}
+
+.about-box p {
+    color: #718096;
+    font-size: 14px;
+    line-height: 1.6;
+}
