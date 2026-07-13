@@ -32,7 +32,7 @@ I personally found that aksharamukha works better when compared to indic-transli
 - Translation support.
 - Text-to-Speech for Telugu pronunciation.
 
-**How you can contribute!!!**
+## How you can contribute!!! ##
 Contributions are welcome! There are many ways to help improve Maata.
 
 ### 🐞 Report Bugs
