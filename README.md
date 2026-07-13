@@ -31,3 +31,38 @@ I personally found that aksharamukha works better when compared to indic-transli
 - Add autocomplete suggestions similar to Google Input Tools.
 - Translation support.
 - Text-to-Speech for Telugu pronunciation.
+
+**How you can contribute!!!**
+Contributions are welcome! There are many ways to help improve Maata.
+
+### 🐞 Report Bugs
+- Report incorrect Telugu transliterations.
+- Share edge cases involving names, loanwords, or uncommon spellings.
+- Report UI or usability issues.
+
+### 📚 Expand the Dictionary
+Help improve the JSON dictionaries by adding more Telugu words and commonly confused phrases
+
+### 🔤 Improve Transliteration Rules
+Contribute better preprocessing rules for:
+- Nasal sounds
+- Retroflex consonants (ణ, ళ)
+- Conjunct consonants
+- Telugu phonetic exceptions
+
+### 💻 Improve the User Experience
+Ideas include:
+- Better autocomplete
+- Accessibility improvements (ARIA support)
+- Responsive UI improvements
+
+### 🌍 Add New Features
+Some future ideas include:
+- Multiple transliteration engines
+- Speech-to-text input
+- Text-to-speech output
+- Support for additional Indian languages
+
+---
+
+If you'd like to contribute, feel free to fork the repository, create a new branch, and submit a Pull Request.
