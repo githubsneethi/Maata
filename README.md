@@ -1,7 +1,9 @@
-As we know, we face a lot of difficulties in transliterating from one language to another, particularly if it involves scripts different from Latin (i.e. English scripts). 
+We face a lot of difficulties in transliterating from one language to another, particularly if it involves scripts different from Latin (i.e. English scripts). 
 Thus, the Maata keyboard was created, taking inspiration from www.lexilogos.com, which has transliteration tools for over 100 languages.
 This is a simple attempt to practice my skills in transliteration using the indic-transliteration and aksharamukha libaries in Python, combined with a frontend in HTML, CSS, and Flask for API integration, JavaScript Fetch API.
 I personally found that aksharamukha works better when compared to indic-transliteration, but only when the user types proper romanized words: eg. if we write 'kRsNa' as opposed to simply 'krishna'
+
+View a basic demo of Maata at: https://drive.google.com/file/d/1NCze1Z2B3ulGgc9CejfxY3xXcSPXjc06/view?usp=sharing
 
 ## Features of Maata ##
 
