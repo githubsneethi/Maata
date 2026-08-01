@@ -1,14 +1,17 @@
 from flask import Flask, render_template, jsonify, request
 from indic_transliteration import sanscript
 import re
+import requests
+import json
 
 app = Flask(__name__)
 
 def load_dictionary(path):
-    import json
-
-    with open(path, encoding="utf-8") as f:
-        return json.load(f)
+    try:
+        with open(path, encoding="utf-8") as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return {}
 
 SPECIAL_WORDS = load_dictionary("dic1.json")
 ENGLISH_TELUGU_DICT = load_dictionary("eng2tel.json")
@@ -18,7 +21,6 @@ class TrieNode:
         self.children = {}
         self.is_end = False
         self.word = None
-
 
 class Trie:
     def __init__(self):
@@ -55,43 +57,40 @@ class Trie:
             if len(results) < max_results:
                 self._dfs(child, results, max_results)
 
-
 trie = Trie()
 for english_word in ENGLISH_TELUGU_DICT.keys():
     trie.insert(english_word)
 
 def preprocess_telugu(text):
-
     if not text:
         return ""
 
     result = text.strip()
-
-    
     lower = result.lower()
 
     if lower in SPECIAL_WORDS:
         return SPECIAL_WORDS[lower]
 
-    result = re.sub(r'm(?=[bcdfghjklmnpqrstvwxyz])',
-                    'M',
-                    result,
-                    flags=re.IGNORECASE)
-
+    result = re.sub(r'm(?=[bcdfghjklmnpqrstvwxyz])', 'M', result, flags=re.IGNORECASE)
     result = re.sub(r'nt', 'NT', result, flags=re.IGNORECASE)
-
     result = re.sub(r'nd', 'ND', result, flags=re.IGNORECASE)
-
     result = re.sub(r'mp', 'Mp', result, flags=re.IGNORECASE)
-
     result = re.sub(r'mb', 'Mb', result, flags=re.IGNORECASE)
-
     result = re.sub(r'ng', 'G', result, flags=re.IGNORECASE)
 
     return result
 
-typed_text = ""
-listener_running = False
+def transliterate_aksharamukha(text):
+    url = "http://aksharamukha-plugin.appspot.com/api/public"
+    params = {
+        "source": "HK",         
+        "target": "Telugu",
+        "text": text
+    }
+    response = requests.get(url, params=params, timeout=5)
+    if response.status_code == 200:
+        return response.text
+    return text
 
 @app.route('/')
 def index():
@@ -99,13 +98,23 @@ def index():
 
 @app.route('/transliterate', methods=['POST'])
 def transliterate():
-    data = request.get_json()
+    data = request.get_json() or {}
     text = data.get('text', '')
+    engine = data.get('engine', 'rule')
     
-    preprocessed = preprocess_telugu(text)
+    if not text:
+        return jsonify({'english': '', 'telugu': ''})
+
     try:
-        telugu_text = sanscript.transliterate(preprocessed, sanscript.ITRANS, sanscript.TELUGU)
-    except:
+        if engine == "akshara":
+            telugu_text = transliterate_aksharamukha(text)
+        elif engine == "itrans":
+            telugu_text = sanscript.transliterate(text, sanscript.ITRANS, sanscript.TELUGU)
+        else:  # 'rule' based default
+            preprocessed = preprocess_telugu(text)
+            telugu_text = sanscript.transliterate(preprocessed, sanscript.ITRANS, sanscript.TELUGU)
+    except Exception as e:
+        print("Transliteration Error:", e)
         telugu_text = text
 
     return jsonify({
@@ -122,7 +131,6 @@ def get_suggestions(prefix):
     result = [{'english': w, 'telugu': ENGLISH_TELUGU_DICT.get(w, '')} for w in suggestions]
     return jsonify({'suggestions': result})
 
-
 @app.route('/clear')
 def clear():
     return jsonify({'status': 'cleared'})
@@ -130,7 +138,6 @@ def clear():
 @app.route("/health")
 def health():
     return jsonify({"status": "ok"})
-
 
 if __name__ == '__main__':
     print("Server running at http://localhost:5000")
