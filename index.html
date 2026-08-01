@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,62 +9,77 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='stylesheet.css') }}">
-    
 </head>
+
 <body>
-<div class = "page">
-    <div class="container">   
-        <h1> Maata : Eng - Tel Keyboard</h1>
-        <div>
-            <button id="controlBtn" onclick="changeSize(2)"> A+ </button>
-            <button id="controlBtn" onclick="changeSize(-2)"> A- </button>
-        </div>
+    <div class="page">
+        <div class="container">
+            <h1>Maata : Eng - Tel Keyboard</h1>
 
-        <div class = "subcontainer">
-            <div class="section">
-                <label for="english">English:</label>
-                <textarea id="english" class="output" placeholder="English text"></textarea>
-                
-                <div class="suggestions-container" id="suggestionsContainer"></div>
+            <div class="header-toolbar">
+                <div class="font-controls">
+                    <button id="font-increase" class="tool-btn" onclick="changeSize(2)"> A+ </button>
+                    <button id="font-decrease" class="tool-btn" onclick="changeSize(-2)"> A- </button>
+                </div>
+
+                <div class="toolbar-right">
+                    <div class="dropdown" aria-label="Select transliteration Engine">
+                        <button class="ruleBtn" id="engineBtn">Engine: Rule-Based</button>
+                        <div class="dropdown-content">
+                            <a href="#" onclick="setEngine('rule')">Engine: Rule-Based</a>
+                            <a href="#" onclick="setEngine('itrans')">Engine: ITRANS</a>
+                            <a href="#" onclick="setEngine('akshara')">Engine: Aksharamukha</a>
+                        </div>
+                    </div>
+
+                    <button id="dark-mode-toggle" class="tool-btn icon-btn" aria-label="Toggle dark mode">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="5"></circle>
+                            <line x1="12" y1="1" x2="12" y2="3"></line>
+                            <line x1="12" y1="21" x2="12" y2="23"></line>
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                            <line x1="1" y1="12" x2="3" y2="12"></line>
+                            <line x1="21" y1="12" x2="23" y2="12"></line>
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                        </svg>
+                    </button>
+                </div>
             </div>
 
-            <div class="section">
-                <label for="telugu">Telugu:</label>
-                <textarea id="telugu" class="output" placeholder="Telugu text"></textarea>
-                <button id = "copyBtn">Copy Telugu Text</button>
+            <div class="subcontainer">
+                <div class="section">
+                    <label for="english">English:</label>
+                    <textarea id="english" class="output" placeholder="English text"></textarea>
+                    <div class="suggestions-container" id="suggestionsContainer"></div>
+                </div>
+
+                <div class="section">
+                    <label for="telugu">Telugu:</label>
+                    <textarea id="telugu" class="output" placeholder="Telugu text"></textarea>
+                    <div id="copy-btn-wrapper">
+                        <button id="copyBtn">Copy Telugu Text</button>
+                    </div>
+                </div>
+            </div>
+            
+            <button id="clearBtn" onclick="clearText()">Clear</button>
+
+            <div class="info">
+                <strong>How it works:</strong> Type some words. Suggestions will appear below the text field.
+            </div>
+
+            <div class="debug" id="debug">Connecting to server...</div>
+            
+            <div class="about-box">
+                <h2>About Maata</h2>
+                <p>
+                    Maata is an English-to-Telugu transliteration keyboard designed to make typing Telugu easier using the English keyboard. It combines phonetic preprocessing, custom language rules, and autocomplete to generate natural Telugu script.
+                </p>
             </div>
         </div>
-        <button id = "clearBtn" onclick="clearText()">Clear</button>
-
-        <div class="info">
-            <strong>How it works:</strong> Type some words. Suggestions will appear below the text field.
-        </div>
-
-        <!--<div class="info" style="background: #fff0f0; border-left-color: #764ba2; margin-top: 10px;">
-            <strong>Telugu Phonetic Rules:</strong>
-            <ul style="margin-top: 8px; margin-left: 20px;">
-                <li><strong>న (Simple N):</strong> Type 'n' before vowels → namaste = నమస్తే</li>
-                <li><strong>ణ (Retroflex N):</strong> Auto-detected! Type 'n' before 't/d → pranuthi = ప్రణుతి</li>
-                <li><strong>ం (Anusvara):</strong> Type 'M' (capital) → saMsaram = సంసారం</li>
-                <li><strong>ఞ (Palatal Nasal):</strong> Type 'ny' → chinchu = చించు</li>
-                <li><strong>ఙ (Velar Nasal):</strong> Type 'ng' → langa = లంగా</li>
-            </ul>
-        </div>-->
-
-        <div class="debug" id="debug">Connected to server</div>
     </div>
-    <div class="about-box">
-        <h2>About Maata</h2>
-
-        <p>
-            Maata is an English-to-Telugu transliteration keyboard designed to
-            make typing Telugu easier using the English keyboard. It combines
-            phonetic preprocessing, custom language rules, and autocomplete to
-            generate natural Telugu script.
-        </p>
-    </div>
-</div>
-    
-<script src = "{{ url_for('static', filename='script.js') }}"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
